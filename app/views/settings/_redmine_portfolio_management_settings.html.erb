@@ -1,0 +1,6 @@
+<p>
+    <label>Teste:</label>
+    <%= hidden_field_tag("settings[render_plugin_tips]", 0) %>
+    <%= check_box_tag("settings[render_plugin_tips]", 1,
+                      portfolio_management::Setting.render_plugin_tips, :autofocus => "autofocus") %>
+  </p>

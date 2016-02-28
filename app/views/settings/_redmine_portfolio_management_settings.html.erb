@@ -3,9 +3,8 @@
     <tr>
       <th><%= l(:portfolio_management_attribute) %></th>
       <td>
-        <%= select_tag 'settings[portfolio_management_attribute]', options_from_collection_for_select(CustomField.all, :name, :name, 'settings[portfolio_management_attribute]') %>
+        <%= select_tag 'settings[portfolio_management_attribute]', options_from_collection_for_select(CustomField.all, :name, :name, RedminePortfolioManagement::Redmine.settings[:portfolio_management_attribute]) %>
       </td>
     </tr>
   </tbody>
 </table>
-

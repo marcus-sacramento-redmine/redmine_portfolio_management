@@ -1,6 +1,11 @@
-<p>
-    <label>Teste:</label>
-    <%= hidden_field_tag("settings[render_plugin_tips]", 0) %>
-    <%= check_box_tag("settings[render_plugin_tips]", 1,
-                      portfolio_management::Setting.render_plugin_tips, :autofocus => "autofocus") %>
-  </p>
+<table>
+  <tbody>
+    <tr>
+      <th><%= l(:portfolio_management_attribute) %></th>
+      <td>
+        <%= select_tag 'settings[portfolio_management_attribute]', options_from_collection_for_select(CustomField.all, :name, :name, 'settings[portfolio_management_attribute]') %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

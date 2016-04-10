@@ -1,9 +1,21 @@
 <table>
   <tbody>
     <tr>
-      <th><%= l(:portfolio_management_attribute) %></th>
-      <td>
+      <th align="left"><%= l(:portfolio_management_attribute) %></th>
+      <td width="450">
         <%= select_tag 'settings[portfolio_management_attribute]', options_from_collection_for_select(CustomField.all, :name, :name, RedminePortfolioManagement::Redmine.settings[:portfolio_management_attribute]) %>
+      </td>
+    </tr>
+    <tr>
+      <th align="left"><%= l(:portfolio_management_manager_attribute) %></th>
+      <td width="450">
+        <%= select_tag 'settings[portfolio_management_manager_attribute]', options_from_collection_for_select(CustomField.all, :name, :name, RedminePortfolioManagement::Redmine.settings[:portfolio_management_manager_attribute]) %>
+      </td>
+    </tr>
+    <tr>
+      <th align="left"><%= l(:portfolio_management_visible_attribute) %></th>
+      <td width="450">
+        <%= select_tag 'settings[portfolio_management_visible_attribute]', options_from_collection_for_select(CustomField.all, :name, :name, RedminePortfolioManagement::Redmine.settings[:portfolio_management_visible_attribute]) %>
       </td>
     </tr>
   </tbody>

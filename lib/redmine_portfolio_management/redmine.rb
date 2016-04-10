@@ -18,6 +18,14 @@ module RedminePortfolioManagement
         def portfolio_management_attribute
             custom_field(:portfolio_management_attribute)
         end
+        
+        def portfolio_management_manager_attribute
+            custom_field(:portfolio_management_manager_attribute)
+        end
+		
+		def portfolio_management_visible_attribute
+            custom_field(:portfolio_management_visible_attribute)
+        end
 
 		protected
             def custom_field(name)

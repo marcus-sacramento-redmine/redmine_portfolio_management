@@ -1,8 +1,9 @@
 # English strings go here for Rails i18n
 en:
   # my_label: "My label"
-    portfolio_management_menu: "Portfolio"
-    portfolio_management_attribute: "Portfolio-Campo Customizado(Lista|Projeto|)"
-    portfolio_management_manager_attribute: "Gerente-Campo Customizado(Usuário|Projeto|)"
-    portfolio_management_visible_attribute: "Visibilidade-Campo Customizado(Boolean|Projeto|)"
+    portfolio_management_title: "Project Portfolio"
+    portfolio_management_menu: "Project Portfolio"
+    portfolio_management_attribute: "Portfolio-Custom Field(List|Project|)"
+    portfolio_management_manager_attribute: "Manager-Custom Field(User|Project|)"
+    portfolio_management_visible_attribute: "Visibility Plugin-Custom Field(Boolean|Project|)"
 

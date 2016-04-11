@@ -26,7 +26,21 @@ module RedminePortfolioManagement
 		def portfolio_management_visible_attribute
             custom_field(:portfolio_management_visible_attribute)
         end
-
+        
+        def list_projects_portfolio
+            sql = "SELECT * from #{Project.table_name}"
+            projects = ActiveRecord::Base.connection.select_all(sql)
+            s= ' t '
+            projects.each do |project|
+               s<< project['id'] +"-"
+            end
+            s
+        end
+        
+        
+        
+        
+    
 		protected
             def custom_field(name)
                 CustomField.find_by_name(settings[name.to_sym])

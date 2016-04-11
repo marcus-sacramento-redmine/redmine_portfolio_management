@@ -1,6 +1,9 @@
 This changelog is auto-generated using git-changelog.
 See https://github.com/lkdjiin/git-changelog for more information.
 
+
+2016-04-10 Versão 0.0.4 - Configurações Básicas do Plugin  
+===========================================================
 * 2016-04-10 Campos de Gestor e Visibilidade adicionados as opções  
 * 2016-02-28 Merge pull request #1 from marcus-sacramento-redmine/development  
   Gravação de Configurações em Banco

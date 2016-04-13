@@ -3,18 +3,25 @@
 
 </br>
 
-Listagem de Nome do Campo Personalizado:
-<%= RedminePortfolioManagement::Redmine::portfolio_management_attribute::name %>
-
 </br>
 Listagem dos Portfólios cadastrados
-<%= RedminePortfolioManagement::Redmine::list_portfolio_values %>
-
 
 </br>
-Listagem dos Projetos cadastrados
-<%= RedminePortfolioManagement::Redmine::list_projects_portfolio(1) %>
-
-
-
+</br>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+<% RedminePortfolioManagement::Redmine::list_portfolio_values.each do |portfolio| %>
+<%=raw portfolio['value']+"</br>".html_safe %>
+<table class="tg"><tr><th class="tg-yw4l">Nome</th><th class="tg-yw4l">Criado em</th><th class="tg-yw4l">Atualizado em</th><th class="tg-yw4l">Publico</th></tr>
+<% RedminePortfolioManagement::Redmine::list_projects_portfolio(portfolio['id'],portfolio['value']).each do |project| %>
+<%=raw "<td class='tg-yw4l'>"+project['name']+"</td>"+"<td class='tg-yw4l'>"+project['created_on']+"</td>"+"<td class='tg-yw4l'>"+project['updated_on']+"</td>"+"<td class='tg-yw4l'>"+project['is_public']+"</td>".html_safe %>
+</tr>
+<% end %>
+</table>
+<% end %>
+</br>
 </div>

@@ -30,21 +30,13 @@ module RedminePortfolioManagement
         def list_portfolio_values
             sql = "Select distinct cf.id,cv.Value from #{CustomValue.table_name} cv,#{CustomField.table_name} cf where cf.id = cv.custom_field_id and cf.type = 'ProjectCustomField' and name = '#{portfolio_management_attribute::name}'"
             portfolios = ActiveRecord::Base.connection.select_all(sql)
-            s= '|'
-            portfolios.each do |portfolio|
-               s<< portfolio['id'] +"-" +portfolio['value'] +"|"
-            end
-            s
+            portfolios
         end
         
-        def list_projects_portfolio(portfolio_type)
-            sql = "select cv.value,p.id as project_id,p.name,p.identifier,p.parent_id,p.created_on, p.updated_on, p.is_public from #{CustomValue.table_name} cv, #{Project.table_name} p where cv.customized_id = p.id and cv.customized_type = 'Project' and custom_field_id = #{portfolio_type} order by p.created_on"
+        def list_projects_portfolio(portfolio_type, portfolio_name)
+            sql = "select cv.value,p.id as project_id,p.name,p.identifier,p.parent_id,to_char(p.created_on,'dd/mm/yyyy') as created_on, to_char(p.updated_on,'dd/mm/yyyy') as updated_on, p.is_public from #{CustomValue.table_name} cv, #{Project.table_name} p where cv.customized_id = p.id and cv.customized_type = 'Project' and custom_field_id = #{portfolio_type} and cv.value = '#{portfolio_name}' order by p.created_on"
             projects = ActiveRecord::Base.connection.select_all(sql)
-            s= '|'
-            projects.each do |project|
-               s<< project['value'] +"-"+project['name'] +"-"+project['project_id']+"-"+project['created_on']+"-"+project['is_public']+"|"
-            end
-            s
+            projects
         end
         
         

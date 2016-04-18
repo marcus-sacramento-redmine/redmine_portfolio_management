@@ -6,4 +6,6 @@ en:
     portfolio_management_attribute: "Portfolio-Campo Customizado(Lista|Projeto|)"
     portfolio_management_manager_attribute: "Gerente-Campo Customizado(Usuário|Projeto|)"
     portfolio_management_visible_attribute: "Visibilidade-Campo Customizado(Boolean|Projeto|)"
+    portfolio_management_previous: "Anterior"
+    portfolio_management_next: "Próximo"
 

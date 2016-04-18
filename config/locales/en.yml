@@ -6,4 +6,7 @@ en:
     portfolio_management_attribute: "Portfolio-Custom Field(List|Project|)"
     portfolio_management_manager_attribute: "Manager-Custom Field(User|Project|)"
     portfolio_management_visible_attribute: "Visibility Plugin-Custom Field(Boolean|Project|)"
+    portfolio_management_previous: "Previous"
+    portfolio_management_next: "NExt"
+    
 

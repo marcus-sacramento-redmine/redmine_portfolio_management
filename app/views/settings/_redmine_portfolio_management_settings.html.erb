@@ -18,5 +18,13 @@
         <%= select_tag 'settings[portfolio_management_visible_attribute]', options_from_collection_for_select(CustomField.all, :name, :name, RedminePortfolioManagement::Redmine.settings[:portfolio_management_visible_attribute]) %>
       </td>
     </tr>
+    <tr>
+      <th align="left"><%= l(:portfolio_management_visible_attribute) %></th>
+      <td width="450">
+        <input type="text" id="portfolio_project_pagination" value="<%= settings['portfolio_project_pagination'] %>" name="settings[portfolio_project_pagination]" >
+      </td>
+    </tr>
+    
+    
   </tbody>
 </table>

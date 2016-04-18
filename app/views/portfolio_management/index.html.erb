@@ -1,27 +1,59 @@
-<h2><%= l(:portfolio_management_title) %></h2>
-<div id="projects-index">
-
-</br>
-
-</br>
-Listagem dos Portfólios cadastrados
-
-</br>
-</br>
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-.tg .tg-yw4l{vertical-align:top}
-</style>
-<% RedminePortfolioManagement::Redmine::list_portfolio_values.each do |portfolio| %>
-<%=raw portfolio['value']+"</br>".html_safe %>
-<table class="tg"><tr><th class="tg-yw4l">Nome</th><th class="tg-yw4l">Criado em</th><th class="tg-yw4l">Atualizado em</th><th class="tg-yw4l">Publico</th></tr>
-<% RedminePortfolioManagement::Redmine::list_projects_portfolio(portfolio['id'],portfolio['value']).each do |project| %>
-<%=raw "<td class='tg-yw4l'>"+project['name']+"</td>"+"<td class='tg-yw4l'>"+project['created_on']+"</td>"+"<td class='tg-yw4l'>"+project['updated_on']+"</td>"+"<td class='tg-yw4l'>"+project['is_public']+"</td>".html_safe %>
-</tr>
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag "table.css", :plugin => 'redmine_portfolio_management' %>
+  <%= javascript_include_tag "table.js", :plugin => 'redmine_portfolio_management' %>
+  <%= javascript_include_tag "tablePage.js", :plugin => 'redmine_portfolio_management' %>
 <% end %>
+
+<h1><%= l(:portfolio_management_title) %></h1>
+<div id="projects-index">
+<% RedminePortfolioManagement::Redmine::list_portfolio_values.each do |portfolio| %>
+<h2><%=raw portfolio['value']%></h2>
+<div class="datagrid">
+<table class='table-autopage:10 table-autosort:2 table-stripeclass:alt sort5' id='<%=raw portfolio['value_id']%>'>
+        <thead>
+            <tr>
+                <th class='table-sortable:default'>Projeto Pai</th>
+                <th class='table-sortable:default'>Projeto</th>
+                <th class='table-sortable:default'>Responsável</th>
+                <th class='table-sortable:date'>Data de Criação</th>
+                <th class='table-sortable:date'>Data de Início</th>
+                <th class='table-sortable:date'>Data Fim</th>
+                <th class='table-sortable:numeric'>% Concluído</th>
+            </tr>
+            <tr>
+                <th><input name='project_filter' onkeyup='Table.filter(this,this)'></th>
+                <th><input name='project_filter' onkeyup='Table.filter(this,this)'></th>
+                <th><input name='project_filter' onkeyup='Table.filter(this,this)'></th>
+                <th><input name='project_filter' onkeyup='Table.filter(this,this)'></th>
+                <th><input name='project_filter' onkeyup='Table.filter(this,this)'></th>
+                <th><input name='project_filter' onkeyup='Table.filter(this,this)'></th>
+                <th><input name='project_filter' onkeyup='Table.filter(this,this)' size='5'></th>
+            </tr>
+        </thead>
+        <tbody>
+        <% _total=0 %>
+            <% RedminePortfolioManagement::Redmine::list_projects_portfolio(portfolio['id'],portfolio['value']).each do |project| %>
+                <%_total=_total+1%>
+                <%=raw "<tr class='"+cycle('normal','alt')+"'><td><i>"+project['parent_project']+"</i></td><td><b><a href='/projects/"+project['identifier']+"'>"+project['name']+"</a></b></td><td>"+RedminePortfolioManagement::Redmine::project_responsible(project['project_id'])+"</td><td>"+project['created_on']+"</td><td>"+RedminePortfolioManagement::Redmine::start_date_project(project['project_id'])+"</td><td>"+RedminePortfolioManagement::Redmine::due_date_project(project['project_id'])+"</td><td>"+RedminePortfolioManagement::Redmine::project_evolution(project['project_id'])+"</td></tr>" %>
+           <% end %>           
+    	</tbody>
+    	<tfoot>
+    	  <td colspan='7'>
+    	   
+			   <% if _total > 10 then  %>
+			   <a href="#" onclick="pageTable('previous','<%=raw portfolio['value_id']%>'); return false;">&laquo;&nbsp;<%= l(:portfolio_management_previous) %></a>
+                 <% _result=(Float(_total)/Float(10))  %>
+               
+               <% for i in 0..Integer(_result) %>
+			        <%=raw "<a href='#' id='page#{i+1}' class='pagelink' onclick=\"pageTable(#{i},'#{portfolio['value_id']}'); return false;\">#{i+1}</a>" %>
+			   <% end %>
+			   <a href="#" onclick="pageTable('next','<%=raw portfolio['value_id']%>'); return false;"><%= l(:portfolio_management_next) %>&nbsp;&raquo;</a>
+               <% end %>
+			
+		  </td>
+		</tfoot>
 </table>
+</div>
 <% end %>
 </br>
 </div>

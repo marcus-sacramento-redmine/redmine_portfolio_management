@@ -224,7 +224,7 @@ var Table = (function(){
 
 		AutoSortClassName:"table-autosort",
 		AutoSortColumnPrefix:"table-autosort:",
-		AutoSortTitle:"Click para reorganizar",
+		AutoSortTitle:"Ordenar/Sort",
 		SortedAscendingClassName:"table-sorted-asc",
 		SortedDescendingClassName:"table-sorted-desc",
 		SortableClassName:"table-sortable",

@@ -34,14 +34,14 @@ module RedminePortfolioManagement
         end
         
         def list_projects_portfolio(portfolio_type, portfolio_name)
-            sql = "select cv.value,p.id as project_id,p.name,p.identifier,(case when(select pai.name from #{Project.table_name} pai where pai.id =  p.parent_id)is null then 'Sem Projeto Pai' else (select pai.name from projects pai where pai.id =  p.parent_id) END) as parent_project, p.parent_id,to_char(p.created_on,'dd/mm/yyyy') as created_on, to_char(p.updated_on,'dd/mm/yyyy') as updated_on, p.is_public from #{CustomValue.table_name} cv, #{Project.table_name} p where cv.customized_id = p.id and cv.customized_type = 'Project' and custom_field_id = #{portfolio_type} and cv.value = '#{portfolio_name}' and p.status<>9 order by parent_project,p.created_on desc"
+            sql = "select cv.value,p.id as project_id,p.name,p.identifier,(case when(select pai.name from #{Project.table_name} pai where pai.id =  p.parent_id)is null then 'N/A' else (select pai.name from projects pai where pai.id =  p.parent_id) END) as parent_project, p.parent_id,to_char(p.created_on,'dd/mm/yyyy') as created_on, to_char(p.updated_on,'dd/mm/yyyy') as updated_on, p.is_public from #{CustomValue.table_name} cv, #{Project.table_name} p where cv.customized_id = p.id and cv.customized_type = 'Project' and custom_field_id = #{portfolio_type} and cv.value = '#{portfolio_name}' and p.status<>9 order by parent_project,p.created_on desc"
             projects = ActiveRecord::Base.connection.select_all(sql)
             projects
         end
         
         def start_date_project(project_id)
-            sql = "select (CASE WHEN i.start_date is null then 'Sem Data' else  to_char(i.start_date,'DD/MM/YYYY') END) as start_date from #{Issue.table_name} i where i.project_id = #{project_id} order by i.start_date limit 1"
-			_result = "Sem Tarefa"
+            sql = "select (CASE WHEN i.start_date is null then '-' else  to_char(i.start_date,'DD/MM/YYYY') END) as start_date from #{Issue.table_name} i where i.project_id = #{project_id} order by i.start_date limit 1"
+			_result = "N/A"
 			starts_date = ActiveRecord::Base.connection.select_all(sql)
             starts_date.each do |date|
                 _result = date['start_date']
@@ -50,8 +50,8 @@ module RedminePortfolioManagement
         end
         
         def due_date_project(project_id)
-            sql = "select (CASE WHEN i.due_date is null then 'Sem Data' else  to_char(i.due_date,'DD/MM/YYYY') END) as due_date from #{Issue.table_name} i where i.project_id = #{project_id} order by i.due_date desc limit 1"
-			_result = "Sem Tarefa"
+            sql = "select (CASE WHEN i.due_date is null then '-' else  to_char(i.due_date,'DD/MM/YYYY') END) as due_date from #{Issue.table_name} i where i.project_id = #{project_id} order by i.due_date desc limit 1"
+			_result = "N/A"
 			starts_date = ActiveRecord::Base.connection.select_all(sql)
             starts_date.each do |date|
                 _result = date['due_date']
@@ -60,7 +60,8 @@ module RedminePortfolioManagement
         end
         
         def project_responsible(project_id)
-          sql = "select (select (CASE WHEN u.firstname is null AND u.lastname is null then 'Não Atribuído' WHEN u.firstname ='' then u.lastname else u.lastname  ||' '||u.firstname END) from users u where u.id||'' =  cv.value)||'' as assigned_to from projects p left outer join custom_values cv on(cv.customized_id = p.id ) where cv.customized_type = 'Project' and cv.custom_field_id = #{portfolio_management_manager_attribute::id} and p.id = #{project_id}"
+          
+          sql = "select (case when (select (CASE WHEN u.firstname ='' then u.lastname else u.lastname  ||' '||u.firstname END) from users u where u.id||'' =  cv.value)is null then 'N/A' else (select (CASE WHEN u.firstname ='' then u.lastname else u.lastname  ||' '||u.firstname END) from users u where u.id||'' =  cv.value)end) as assigned_to from projects p left outer join custom_values cv on(cv.customized_id = p.id ) where cv.customized_type = 'Project' and cv.custom_field_id = #{portfolio_management_manager_attribute::id} and p.id = #{project_id}"
 		  _result = ""
 			responsibles = ActiveRecord::Base.connection.select_all(sql)
             responsibles.each do |responsible|

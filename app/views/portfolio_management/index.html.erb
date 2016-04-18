@@ -12,13 +12,13 @@
 <table class='table-autopage:10 table-autosort:2 table-stripeclass:alt sort5' id='<%=raw portfolio['value_id']%>'>
         <thead>
             <tr>
-                <th class='table-sortable:default'>Projeto Pai</th>
-                <th class='table-sortable:default'>Projeto</th>
-                <th class='table-sortable:default'>Responsável</th>
-                <th class='table-sortable:date'>Data de Criação</th>
-                <th class='table-sortable:date'>Data de Início</th>
-                <th class='table-sortable:date'>Data Fim</th>
-                <th class='table-sortable:numeric'>% Concluído</th>
+                <th class='table-sortable:default'><%= l(:portfolio_management_parent_project) %></th>
+                <th class='table-sortable:default'><%= l(:portfolio_management_project) %></th>
+                <th class='table-sortable:default'><%= l(:portfolio_management_responsible) %></th>
+                <th class='table-sortable:date'><%= l(:portfolio_management_create_date) %></th>
+                <th class='table-sortable:date'><%= l(:portfolio_management_start_date) %></th>
+                <th class='table-sortable:date'><%= l(:portfolio_management_due_date) %></th>
+                <th class='table-sortable:numeric'><%= l(:portfolio_management_p_done) %></th>
             </tr>
             <tr>
                 <th><input name='project_filter' onkeyup='Table.filter(this,this)'></th>
@@ -34,7 +34,7 @@
         <% _total=0 %>
             <% RedminePortfolioManagement::Redmine::list_projects_portfolio(portfolio['id'],portfolio['value']).each do |project| %>
                 <%_total=_total+1%>
-                <%=raw "<tr class='"+cycle('normal','alt')+"'><td><i>"+project['parent_project']+"</i></td><td><b><a href='/projects/"+project['identifier']+"'>"+project['name']+"</a></b></td><td>"+RedminePortfolioManagement::Redmine::project_responsible(project['project_id'])+"</td><td>"+project['created_on']+"</td><td>"+RedminePortfolioManagement::Redmine::start_date_project(project['project_id'])+"</td><td>"+RedminePortfolioManagement::Redmine::due_date_project(project['project_id'])+"</td><td>"+RedminePortfolioManagement::Redmine::project_evolution(project['project_id'])+"</td></tr>" %>
+                <%=raw "<tr class='"+cycle('normal','alt')+"'><td><i>"+(project['parent_project']=="N/A"?l(:portfolio_management_without_parent_project):project['parent_project'])+"</i></td><td><b><a href='/projects/"+project['identifier']+"'>"+project['name']+"</a></b></td><td>"+(RedminePortfolioManagement::Redmine::project_responsible(project['project_id'])=="N/A"?l(:portfolio_management_without_responsible):RedminePortfolioManagement::Redmine::project_responsible(project['project_id']))+"</td><td>"+project['created_on']+"</td><td>"+(RedminePortfolioManagement::Redmine::start_date_project(project['project_id'])=="N/A"?l(:portfolio_management_without_date):RedminePortfolioManagement::Redmine::start_date_project(project['project_id']))+"</td><td>"+(RedminePortfolioManagement::Redmine::due_date_project(project['project_id'])=="N/A"?l(:portfolio_management_without_date):RedminePortfolioManagement::Redmine::due_date_project(project['project_id']))+"</td><td>"+RedminePortfolioManagement::Redmine::project_evolution(project['project_id'])+"</td></tr>" %>
            <% end %>           
     	</tbody>
     	<tfoot>

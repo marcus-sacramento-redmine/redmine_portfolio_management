@@ -8,4 +8,17 @@ en:
     portfolio_management_visible_attribute: "Visibilidade-Campo Customizado(Boolean|Projeto|)"
     portfolio_management_previous: "Anterior"
     portfolio_management_next: "Próximo"
+    portfolio_management_without_responsible: "Não Atribuído"
+    portfolio_management_without_parent_project: "Sem Projeto Pai"
+    portfolio_management_without_date: "Sem Tarefas"
+    
+    portfolio_management_parent_project: "Projeto Pai"
+    portfolio_management_project: "Projeto"
+    portfolio_management_responsible: "Responsável"
+    portfolio_management_create_date: "Data de Criação"
+    portfolio_management_start_date: "Data de Início"
+    portfolio_management_due_date: "Data Fim"
+    portfolio_management_p_done: "% Concluído"
+    
+    
 

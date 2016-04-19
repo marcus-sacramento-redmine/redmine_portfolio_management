@@ -1,6 +1,9 @@
 This changelog is auto-generated using git-changelog.
 See https://github.com/lkdjiin/git-changelog for more information.
 
+
+2016-04-18 Versão 1.0.0 - Versão de Lançamento  
+================================================
 * 2016-04-18 criação de Tabela HTML  
 * 2016-04-13 Issue #5 - Select Iterativo para apresentação dos Dados  
 * 2016-04-12 Criação dos Selects Básicos de Porfolios e Projetos  

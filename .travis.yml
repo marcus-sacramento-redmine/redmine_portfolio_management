@@ -26,5 +26,5 @@ script:
   - export PATH_TO_PLUGIN=`pwd`
   - export PATH_TO_REDMINE=$TESTSPACE/redmine
   - mkdir $TESTSPACE
-  - cp test/support/* $TESTSPACE/
+  - cp test/functional/* $TESTSPACE/
   - bash -x ./travis.sh

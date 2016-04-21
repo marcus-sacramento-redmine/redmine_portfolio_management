@@ -9,7 +9,11 @@
 <% RedminePortfolioManagement::Redmine::list_portfolio_values.each do |portfolio| %>
 <h2><%=raw portfolio['value']%></h2>
 <div class="datagrid">
-<table class='table-autopage:10 table-autosort:2 table-stripeclass:alt sort5' id='<%=raw portfolio['value_id']%>'>
+
+
+
+
+<table class='table-autopage:10 table-autosort:2 table-stripeclass:alt sort5' id='<%=raw portfolio['value_id'].gsub(/[^a-zA-Z0-9]/, "_") %>'>
         <thead>
             <tr>
                 <th class='table-sortable:default'><%= l(:portfolio_management_parent_project) %></th>

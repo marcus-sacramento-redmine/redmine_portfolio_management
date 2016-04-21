@@ -29,7 +29,7 @@ module RedminePortfolioManagement
         end
         
         def list_portfolio_values
-            sql = "Select distinct cf.id,cv.Value,regexp_replace(lower(cv.Value),'[^a-zA-Z0-9]+','','g') as value_id from #{CustomValue.table_name} cv,#{CustomField.table_name} cf where cf.id = cv.custom_field_id and cf.type = 'ProjectCustomField' and name = '#{portfolio_management_attribute::name}' and cv.Value <> ''"
+            sql = "Select distinct cf.id,cv.Value,lower(cv.Value) as value_id from #{CustomValue.table_name} cv,#{CustomField.table_name} cf where cf.id = cv.custom_field_id and cf.type = 'ProjectCustomField' and name = '#{portfolio_management_attribute::name}' and cv.Value <> ''"
             portfolios = ActiveRecord::Base.connection.select_all(sql)
             portfolios
         end

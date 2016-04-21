@@ -1,6 +1,17 @@
 This changelog is auto-generated using git-changelog.
 See https://github.com/lkdjiin/git-changelog for more information.
 
+* 2016-04-21 Update .codeclimate.yml  
+* 2016-04-21 Adicionando arquivo de configuração do codeclimates  
+* 2016-04-21 Issue #6 - Tratamento de expressão regular via ruby ao invés de banco  
+* 2016-04-21 Update Gemfile  
+* 2016-04-21 Update wercker.yml  
+* 2016-04-19 Update wercker.yml  
+* 2016-04-19 Create wercker.yml  
+* 2016-04-19 Remoção da Gem nokogiri  
+* 2016-04-19 Teste de Documentação  
+* 2016-04-18 Atualização do Readme - v1.0.0  
+* 2016-04-19 Issue #5, #4, #3 - Plugin Básico com documentação  
 
 2016-04-18 Versão 1.0.0 - Versão de Lançamento  
 ================================================

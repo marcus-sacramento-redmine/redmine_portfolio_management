@@ -1,6 +1,9 @@
 This changelog is auto-generated using git-changelog.
 See https://github.com/lkdjiin/git-changelog for more information.
 
+
+2016-04-21 Versão 1.0.1 - Tratamento de expressão Regular via Ruby  
+====================================================================
 * 2016-04-21 Update .codeclimate.yml  
 * 2016-04-21 Adicionando arquivo de configuração do codeclimates  
 * 2016-04-21 Issue #6 - Tratamento de expressão regular via ruby ao invés de banco  

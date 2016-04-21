@@ -6,7 +6,10 @@ class PortfolioManagementControllerTest < ActionController::TestCase
     assert true
   end
   
-  
+  def test_sql
+    RedminePortfolioManagement::Redmine::project_responsible(1)
+    assert true
+  end
   
   
 end

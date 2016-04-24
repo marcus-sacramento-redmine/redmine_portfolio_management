@@ -1,15 +1,18 @@
 language: ruby
 rvm:
-  - 2.3.0
-  - 2.0.0
+  - 1.9.33
+  - 2.0.02
+  - 2.1
+  - 2.21
+  
 branches:
   only:
     - development
 env:
   - REDMINE_VERSION=3.2.1 VERBOSE=yes
-  - REDMINE_VERSION=3.0.0 VERBOSE=yes
-  - REDMINE_VERSION=2.3.3 VERBOSE=yes
-  - REDMINE_VERSION=2.0.0 VERBOSE=yes
+  - REDMINE_VERSION=3.1.4 VERBOSE=yes
+  - REDMINE_VERSION=2.6.10 VERBOSE=yes
+  
 script:
   - export PLUGIN=redmine_portfolio_management
   - export WORKSPACE=$(pwd)/workspace

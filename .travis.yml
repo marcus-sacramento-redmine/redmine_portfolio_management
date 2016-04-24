@@ -2,7 +2,6 @@ language: ruby
 rvm:
   - 2.3.0
   - 2.0.0
-  - 1.9.3
 branches:
   only:
     - development
@@ -21,3 +20,7 @@ script:
   - bash -x ./.travis-init.sh -i || exit 1
   - bash -x ./.travis-init.sh -t || exit 1
   - bash -x ./.travis-init.sh -u || exit 1
+
+addons:
+  code_climate:
+    repo_token: fa9108d61aa23b167ddee861d5ad82a9b5394174f151b667c5cdac274817485a

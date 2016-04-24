@@ -7,7 +7,7 @@ class PortfolioManagementControllerTest < ActionController::TestCase
   end
   
   def test_database_functions
-	RedminePortfolioManagement::Redmine::list_portfolio_values
+	RedminePortfolioManagement::Redmine::project_evolution(1)
 	assert true
   end
   

@@ -6,6 +6,7 @@ rvm:
 branches:
   only:
     - development
+	- master
 env:
   - REDMINE_VERSION=3.2.1 VERBOSE=yes
   - REDMINE_VERSION=3.2.0 VERBOSE=yes

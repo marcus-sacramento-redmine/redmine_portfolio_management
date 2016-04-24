@@ -1,15 +1,14 @@
 language: ruby
 rvm:
-  - 1.9.33
-  - 2.0.02
   - 2.1
-  - 2.21
+  - 2.2.3
   
 branches:
   only:
     - development
 env:
   - REDMINE_VERSION=3.2.1 VERBOSE=yes
+  - REDMINE_VERSION=3.2.0 VERBOSE=yes
   - REDMINE_VERSION=3.1.4 VERBOSE=yes
   - REDMINE_VERSION=2.6.10 VERBOSE=yes
   

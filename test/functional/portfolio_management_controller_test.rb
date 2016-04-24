@@ -1,9 +1,14 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class PortfolioManagementControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
+
   def test_truth
-    assert truth
+    assert true
+  end
+  
+  def test_database_functions
+	RedminePortfolioManagement::Redmine::list_portfolio_values
+	assert true
   end
   
 end

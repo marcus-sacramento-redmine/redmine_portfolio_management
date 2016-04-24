@@ -3,7 +3,7 @@
 
 >Plugin criado para permitir a visualição de Projeto em Agrupamentos de Portfolio
 
->>[![wercker status](https://app.wercker.com/status/9e03f84161153500a6192c8e0dae9d82/m "wercker status")](https://app.wercker.com/project/bykey/9e03f84161153500a6192c8e0dae9d82) [![Build Status](https://drone.io/github.com/marcus-sacramento-redmine/redmine_portfolio_management/status.png)](https://drone.io/github.com/marcus-sacramento-redmine/redmine_portfolio_management/latest) 
+>>[![Build Status](https://travis-ci.org/marcus-sacramento-redmine/redmine_portfolio_management.svg?branch=master)](https://travis-ci.org/marcus-sacramento-redmine/redmine_portfolio_management)
 
 >>[![Issue Count](https://codeclimate.com/github/marcus-sacramento-redmine/redmine_portfolio_management/badges/issue_count.svg)](https://codeclimate.com/github/marcus-sacramento-redmine/redmine_portfolio_management) [![Issues](https://img.shields.io/github/issues/marcus-sacramento-redmine/redmine_portfolio_management.svg?style=flat-square)](https://github.com/marcus-sacramento-redmine/redmine_portfolio_management/issues) [![Stories in Ready](https://badge.waffle.io/marcus-sacramento-redmine/redmine_portfolio_management.svg?label=ready&title=Ready)](http://waffle.io/marcus-sacramento-redmine/redmine_portfolio_management) [![Stories in Ready](https://badge.waffle.io/marcus-sacramento-redmine/redmine_portfolio_management.svg?label=in test&title=in%20test)](http://waffle.io/marcus-sacramento-redmine/redmine_portfolio_management)
 

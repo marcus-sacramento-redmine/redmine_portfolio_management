@@ -16,9 +16,9 @@ env:
   - REDMINE_VERSION=2.6.10 VERBOSE=yes
 
 matrix:
-	exclude:
-	- rvm: 2.0
-		env: REDMINE_VERSION=2.6.10 VERBOSE=yes
+  exclude:
+    - rvm: 2.0
+        env: REDMINE_VERSION=2.6.10 VERBOSE=yes
 
 script:
   - export PLUGIN=redmine_portfolio_management

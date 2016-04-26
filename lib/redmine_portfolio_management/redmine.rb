@@ -34,27 +34,27 @@ module RedminePortfolioManagement
         end
         
         def list_projects_portfolio(portfolio_type, portfolio_name)
-            sql = "select cv.value,p.id as project_id,p.name,p.identifier,(case when(select pai.name from #{Project.table_name} pai where pai.id =  p.parent_id)is null then 'N/A' else (select pai.name from projects pai where pai.id =  p.parent_id) END) as parent_project, p.parent_id,to_char(p.created_on,'dd/mm/yyyy') as created_on, to_char(p.updated_on,'dd/mm/yyyy') as updated_on, p.is_public from #{CustomValue.table_name} cv, #{Project.table_name} p where cv.customized_id = p.id and cv.customized_type = 'Project' and custom_field_id = #{portfolio_type} and cv.value = '#{portfolio_name}' and p.status<>9 order by parent_project,p.created_on desc"
+            sql = "select cv.value,p.id as project_id,p.name,p.identifier,(case when(select pai.name from #{Project.table_name} pai where pai.id =  p.parent_id)is null then 'N/A' else (select pai.name from projects pai where pai.id =  p.parent_id) END) as parent_project, p.parent_id,p.created_on as created_on, p.updated_on as updated_on, p.is_public from #{CustomValue.table_name} cv, #{Project.table_name} p where cv.customized_id = p.id and cv.customized_type = 'Project' and custom_field_id = #{portfolio_type} and cv.value = '#{portfolio_name}' and p.status<>9 order by parent_project,p.created_on desc"
             projects = ActiveRecord::Base.connection.select_all(sql)
             projects
         end
         
         def start_date_project(project_id)
-            sql = "select (CASE WHEN i.start_date is null then '-' else  to_char(i.start_date,'DD/MM/YYYY') END) as start_date from #{Issue.table_name} i where i.project_id = #{project_id} order by i.start_date limit 1"
+            sql = "select i.start_date as start_date from #{Issue.table_name} i where i.project_id = #{project_id} order by i.start_date limit 1"
 			result = "N/A"
 			starts_date = ActiveRecord::Base.connection.select_all(sql)
             starts_date.each do |date|
-                result = date['start_date']
+                date['start_date']==nil ? (result="-") : ( result=Date.parse(date['start_date']).strftime("%d/%m/%Y"))
             end
             result
         end
         
         def due_date_project(project_id)
-            sql = "select (CASE WHEN i.due_date is null then '-' else  to_char(i.due_date,'DD/MM/YYYY') END) as due_date from #{Issue.table_name} i where i.project_id = #{project_id} order by i.due_date desc limit 1"
+            sql = "select  i.due_date as due_date from #{Issue.table_name} i where i.project_id = #{project_id} order by i.due_date desc limit 1"
 			result = "N/A"
 			starts_date = ActiveRecord::Base.connection.select_all(sql)
             starts_date.each do |date|
-                result = date['due_date']
+                date['due_date']==nil ? (result="-") : ( result=Date.parse(date['due_date']).strftime("%d/%m/%Y"))
             end
             result
         end

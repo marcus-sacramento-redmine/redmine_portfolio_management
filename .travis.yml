@@ -2,6 +2,7 @@ language: ruby
 rvm:
   - 2.1
   - 2.2.3
+  - 2.0
   
 branches:
   only:
@@ -11,8 +12,14 @@ env:
   - REDMINE_VERSION=3.2.1 VERBOSE=yes
   - REDMINE_VERSION=3.2.0 VERBOSE=yes
   - REDMINE_VERSION=3.1.4 VERBOSE=yes
+  - REDMINE_VERSION=3.0.1 VERBOSE=yes
   - REDMINE_VERSION=2.6.10 VERBOSE=yes
-  
+
+matrix:
+	exclude:
+	- rvm: 2.0
+		env: REDMINE_VERSION=2.6.10 VERBOSE=yes
+
 script:
   - export PLUGIN=redmine_portfolio_management
   - export WORKSPACE=$(pwd)/workspace

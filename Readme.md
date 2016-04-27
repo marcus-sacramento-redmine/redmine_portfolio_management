@@ -2,6 +2,8 @@
 [![GitHub tag](https://img.shields.io/github/tag/marcus-sacramento-redmine/redmine_portfolio_management.svg?style=flat-square)](https://github.com/marcus-sacramento-redmine/redmine_portfolio_management/tags) [![Github Releases (by Release)](https://img.shields.io/github/downloads/marcus-sacramento-redmine/redmine_portfolio_management/v1.0.0/total.svg?style=flat-square)](https://github.com/marcus-sacramento-redmine/redmine_portfolio_management/releases) [![Github All Releases](https://img.shields.io/github/downloads/marcus-sacramento-redmine/redmine_portfolio_management/total.svg?style=flat-square)](https://github.com/marcus-sacramento-redmine/redmine_portfolio_management/releases)
 
 >Plugin criado para permitir a visualição de Projeto em Agrupamentos de Portfolio
+>Você pode testá-lo gratuitamente em nosso [Redmine para demonstração](http://redmine-marcusacramento.rhcloud.com/) com usuário e senha: visitante
+
 
 >>[![Build Status](https://travis-ci.org/marcus-sacramento-redmine/redmine_portfolio_management.svg?branch=master)](https://travis-ci.org/marcus-sacramento-redmine/redmine_portfolio_management)
 

@@ -28,7 +28,7 @@ module RedminePortfolioManagement
 		end
         
         def list_portfolio_values
-            sql = "Select distinct cf.id,cv.value,lower(cv.Value) as value_id from #{CustomValue.table_name} cv,#{CustomField.table_name} cf where cf.id = cv.custom_field_id and cf.type = 'ProjectCustomField' and name = '#{portfolio_management_attribute::name}' and cv.Value <> ''"
+            sql = "Select distinct cf.id,cv.value,cv.Value as value_id from #{CustomValue.table_name} cv,#{CustomField.table_name} cf where cf.id = cv.custom_field_id and cf.type = 'ProjectCustomField' and name = '#{portfolio_management_attribute::name}' and cv.Value <> ''"
             portfolios = ActiveRecord::Base.connection.select_all(sql)
             ActiveRecord::Base.logger = Logger.new(STDOUT)
             portfolios
@@ -45,17 +45,19 @@ module RedminePortfolioManagement
 			result = "N/A"
 			starts_date = ActiveRecord::Base.connection.select_all(sql)
             starts_date.each do |date|
-                date['start_date']==nil ? (result="-") : ( result=Date.parse(date['start_date']).strftime("%d/%m/%Y"))
+                date['start_date']==nil ? (result="-") : ( result=DateTime.parse(date['start_date'].to_s).strftime("%d/%m/%Y"))
             end
             result
         end
+        
+        
         
         def due_date_project(project_id)
             sql = "select  i.due_date as due_date from #{Issue.table_name} i where i.project_id = #{project_id} order by i.due_date desc limit 1"
 			result = "N/A"
 			starts_date = ActiveRecord::Base.connection.select_all(sql)
             starts_date.each do |date|
-                date['due_date']==nil ? (result="-") : ( result=Date.parse(date['due_date']).strftime("%d/%m/%Y"))
+                date['due_date']==nil ? (result="-") : ( result=DateTime.parse(date['due_date'].to_s).strftime("%d/%m/%Y"))
             end
             result
         end

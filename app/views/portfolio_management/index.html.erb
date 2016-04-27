@@ -39,12 +39,12 @@
          <tfoot>
             <td colspan='7'>
                <% if _total > 10 then  %>
-               <a href="#" onclick="pageTable('previous','<%=raw portfolio['value_id']%>'); return false;">&laquo;&nbsp;<%= l(:portfolio_management_previous) %></a>
+               <a href="#" onclick="pageTable('previous','<%=raw portfolio['value_id'].gsub(/[^a-zA-Z0-9]/, "_")%>'); return false;">&laquo;&nbsp;<%= l(:portfolio_management_previous) %></a>
                <% _result=(Float(_total)/Float(10))  %>
                <% for i in 0..Integer(_result) %>
-               <%=raw "<a href='#' id='page#{i+1}' class='pagelink' onclick=\"pageTable(#{i},'#{portfolio['value_id']}'); return false;\">#{i+1}</a>" %>
+               <%=raw "<a href='#' id='page#{i+1}' class='pagelink' onclick=\"pageTable(#{i},'#{portfolio['value_id'].gsub(/[^a-zA-Z0-9]/, "_")}'); return false;\">#{i+1}</a>" %>
                <% end %>
-               <a href="#" onclick="pageTable('next','<%=raw portfolio['value_id']%>'); return false;"><%= l(:portfolio_management_next) %>&nbsp;&raquo;</a>
+               <a href="#" onclick="pageTable('next','<%=raw portfolio['value_id'].gsub(/[^a-zA-Z0-9]/, "_")%>'); return false;"><%= l(:portfolio_management_next) %>&nbsp;&raquo;</a>
                <% end %>
             </td>
          </tfoot>

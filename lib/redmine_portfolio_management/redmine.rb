@@ -28,8 +28,9 @@ module RedminePortfolioManagement
 		end
         
         def list_portfolio_values
-            sql = "Select distinct cf.id,cv.Value,lower(cv.Value) as value_id from #{CustomValue.table_name} cv,#{CustomField.table_name} cf where cf.id = cv.custom_field_id and cf.type = 'ProjectCustomField' and name = '#{portfolio_management_attribute::name}' and cv.Value <> ''"
+            sql = "Select distinct cf.id,cv.value,lower(cv.Value) as value_id from #{CustomValue.table_name} cv,#{CustomField.table_name} cf where cf.id = cv.custom_field_id and cf.type = 'ProjectCustomField' and name = '#{portfolio_management_attribute::name}' and cv.Value <> ''"
             portfolios = ActiveRecord::Base.connection.select_all(sql)
+            ActiveRecord::Base.logger = Logger.new(STDOUT)
             portfolios
         end
         
@@ -61,17 +62,17 @@ module RedminePortfolioManagement
         
         def project_responsible(project_id)
           
-          sql = "select (case when (select (CASE WHEN u.firstname ='' then u.lastname else u.lastname  ||' '||u.firstname END) from users u where u.id||'' =  cv.value)is null then 'N/A' else (select (CASE WHEN u.firstname ='' then u.lastname else u.lastname  ||' '||u.firstname END) from users u where u.id||'' =  cv.value)end) as assigned_to from projects p left outer join custom_values cv on(cv.customized_id = p.id ) where cv.customized_type = 'Project' and cv.custom_field_id = #{portfolio_management_manager_attribute::id} and p.id = #{project_id}"
-		  result = ""
-			responsibles = ActiveRecord::Base.connection.select_all(sql)
-            responsibles.each do |responsible|
-                result = result+responsible['assigned_to']
-            end
+          sql = "SELECT (case when firstname is null then 'N/A' ELSE firstname END) as assigned_to FROM users WHERE CAST(id AS char ) IN     (SELECT (CASE WHEN cv.value IS NULL OR cv.value = '' THEN '0' ELSE cv.value END) AS assigned_to FROM projects p LEFT OUTER JOIN custom_values cv on(cv.customized_id = p.id) WHERE cv.customized_type = 'Project' AND cv.custom_field_id = #{portfolio_management_manager_attribute::id} and p.id = #{project_id})"
+		  result ="N/A"
+		  responsibles = ActiveRecord::Base.connection.select_all(sql)
+          responsibles.each do |responsible|
+              result = responsible['assigned_to']
+          end
           result
         end
         
         def project_evolution(project_id)
-            sql = "select closed, count(1) as total from( select issue.id, issue.project_id,(CASE WHEN issue.is_closed = true then 'Fechado' else 'Aberto' END)as closed,issue.status, issue.name,  issue.start_date, issue.due_date, issue.done_ratio,(CASE WHEN users.firstname is null AND users.lastname is null then 'Não Atribuído'   WHEN users.firstname ='' then users.lastname else users.firstname ||' '||users.lastname END) as assigned_to  from  (select i.id, i.project_id,it.name as status, it.is_closed,i.assigned_to_id , t.name , i.subject,to_char(i.start_date,'DD/MM/YYYY') as start_date,  to_char(i.due_date,'DD/MM/YYYY') as due_date,i.done_ratio from issues i, trackers t, issue_statuses it where 1=1 and i.project_id =#{project_id} and i.tracker_id  = t.id and  it.id = i.status_id )issue left outer join users on (users.id = issue.assigned_to_id )) issues group by closed"
+            sql = "select closed, count(1) as total from( select issue.id, issue.project_id,(CASE WHEN issue.is_closed = true then 'Fechado' else 'Aberto' END)as closed,issue.status, issue.name,  issue.start_date, issue.due_date, issue.done_ratio,(CASE WHEN users.firstname is null AND users.lastname is null then 'Não Atribuído'   WHEN users.firstname ='' then users.lastname else users.firstname ||' '||users.lastname END) as assigned_to  from  (select i.id, i.project_id,it.name as status, it.is_closed,i.assigned_to_id , t.name , i.subject,i.start_date as start_date, i.due_date as due_date,i.done_ratio from issues i, trackers t, issue_statuses it where 1=1 and i.project_id =#{project_id} and i.tracker_id  = t.id and  it.id = i.status_id )issue left outer join users on (users.id = issue.assigned_to_id )) issues group by closed"
 		    open = 0
 		    closed = 0
 		    total = 0

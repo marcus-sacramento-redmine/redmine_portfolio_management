@@ -143,7 +143,7 @@ var Table = (function(){
 		if (def(c) && !hasClass(o,name)) {
 			o.className += (c?" ":"") + name;
 		}
-	};
+	}
 
 	/**
 	 * Remove a class from an object
@@ -151,7 +151,7 @@ var Table = (function(){
 	function removeClass(o,name) {
 		var c = o.className || "";
 		o.className = c.replace(new RegExp("(^|\\s)"+name+"(\\s|$)"),"$1");
-	};
+	}
 
 	/**
 	 * For classes that match a given substring, return the rest
@@ -162,7 +162,7 @@ var Table = (function(){
 			return RegExp.$2;
 		}
 		return null;
-	};
+	}
 
 	/**
 	 * Return true if an object is hidden.
@@ -185,7 +185,7 @@ var Table = (function(){
 		return (isHidden = function(o) {
 			return 'none'==o.style['display'];
 		})(o);
-	};
+	}
 
 	/**
 	 * Get a parent element by tag name, or the original element if it is of the tag type
@@ -202,7 +202,7 @@ var Table = (function(){
 			}
 		}
 		return null;
-	};
+	}
 
 	/**
 	 * Utility function to copy properties from one object to another
@@ -242,7 +242,7 @@ var Table = (function(){
 		AutoPageJumpPrefix:"table-page:",
 		PageNumberPrefix:"table-page-number:",
 		PageCountPrefix:"table-page-count:"
-	};
+	}
 
 	/**
 	 * A place to store misc table information, rather than in the table objects themselves
@@ -269,7 +269,7 @@ var Table = (function(){
 			copy(args,this.tabledata[o.id],"stripeclass","ignorehiddenrows","useinnertext","sorttype","col","desc","page","pagesize");
 		}
 		return o;
-	};
+	}
 
 
 	/**
@@ -285,7 +285,7 @@ var Table = (function(){
 		if (type!="THEAD") {
 			this.processCells(t.tFoot, func, arg);
 		}
-	};
+	}
 
 	/**
 	 * Internal method used to process an arbitrary collection of cells.
@@ -308,7 +308,7 @@ var Table = (function(){
 				}
 			}
 		}
-	};
+	}
 
 	/**
 	 * Get the cellIndex value for a cell. This is only needed because of a Safari
@@ -334,7 +334,7 @@ var Table = (function(){
 			}
 		}
 		return 0;
-	};
+	}
 
 	/**
 	 * A map of node names and how to convert them into their "value" for sorting, filtering, etc.
@@ -357,7 +357,7 @@ var Table = (function(){
 		'IMG':function(node) {
 			return node.name || "";
 		}
-	};
+	}
 
 	/**
 	 * Get the text value of a cell. Only use innerText if explicitly told to, because
@@ -396,7 +396,7 @@ var Table = (function(){
 			}
 		}
 		return ret;
-	};
+	}
 
 	/**
 	 * Consider colspan and rowspan values in table header cells to calculate the actual cellIndex
@@ -460,7 +460,7 @@ var Table = (function(){
 		}
 		// Store the map so future lookups are fast.
 		return this.tableHeaderIndexes[tableObj.id][cellCoordinates];
-	};
+	}
 
 	/**
 	 * Sort all rows in each TBODY (tbodies are sorted independent of each other)
@@ -574,7 +574,7 @@ var Table = (function(){
 				this.stripe(t,tdata.stripeclass,!!tdata.ignorehiddenrows);
 			}
 		}
-	};
+	}
 
 	/**
 	* Apply a filter to rows in a table and hide those that do not match.
@@ -644,7 +644,7 @@ var Table = (function(){
 		}
 		// Everything's been setup, so now scrape the table rows
 		return table.scrape(o);
-	};
+	}
 
 	/**
 	 * "Page" a table by showing only a subset of the rows
@@ -668,14 +668,14 @@ var Table = (function(){
 	 */
 	table.pageNext = function(t,args) {
 		return this.pageJump(t,1,args);
-	};
+	}
 
 	/**
 	 * Go to the previous page of a paged table
 	 */
 	table.pagePrevious = function(t,args) {
 		return this.pageJump(t,-1,args);
-	};
+	}
 
 	/**
 	* Scrape a table to either hide or show each row based on filters and paging
@@ -796,7 +796,7 @@ var Table = (function(){
 			tdata.container_all_count.innerHTML = totalrows;
 		}
 		return { 'data':tdata, 'unfilteredcount':unfilteredrowcount, 'total':totalrows, 'pagecount':pagecount, 'page':page, 'pagesize':pagesize };
-	};
+	}
 
 	/**
 	 * Shade alternate rows, aka Stripe the table.
@@ -836,7 +836,7 @@ var Table = (function(){
 				}
 			}
 		}
-	};
+	}
 
 	/**
 	 * Build up a list of unique values in a table column
@@ -854,7 +854,7 @@ var Table = (function(){
 			valArray.push(val);
 		}
 		return valArray.sort();
-	};
+	}
 
 	/**
 	 * Scan the document on load and add sorting, filtering, paging etc ability automatically
@@ -888,7 +888,7 @@ var Table = (function(){
 				}
 			}
 		}
-	};
+	}
 
 	/**
 	 * Add sorting functionality to a table header cell
@@ -914,7 +914,7 @@ var Table = (function(){
 		if (args.col!=null) {
 			table.sort(t,args);
 		}
-	};
+	}
 
 	/**
 	 * Add paging functionality to a table

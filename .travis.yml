@@ -9,6 +9,8 @@ branches:
     - development
     - master
 env:
+  - REDMINE_VERSION=3.3.3 VERBOSE=yes
+  - REDMINE_VERSION=3.2.6 VERBOSE=yes
   - REDMINE_VERSION=3.2.1 VERBOSE=yes
   - REDMINE_VERSION=3.2.0 VERBOSE=yes
   - REDMINE_VERSION=3.1.4 VERBOSE=yes
